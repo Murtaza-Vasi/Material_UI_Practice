@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Create = () => {
+const Create = ({ history }) => {
   const classes = useStyles();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -39,7 +39,19 @@ const Create = () => {
     if (!details) setDetailsError(true);
     else setDetailsError(false);
 
-    if (title && details) console.log(title, details, category);
+    if (title && details) {
+      fetch('http://localhost:5000/notes', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          details,
+          category,
+        }),
+      }).then(() => history.push('/'));
+    }
   };
 
   return (
