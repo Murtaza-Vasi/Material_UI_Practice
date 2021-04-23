@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { purple } from '@material-ui/core/colors';
+import './App.css';
 
+import Layout from './components/Layout';
 import Notes from './pages/Notes';
 import Create from './pages/Create';
-import { purple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
@@ -26,10 +27,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route path='/' exact component={Notes} />
-          <Route path='/create' component={Create} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route path='/' exact component={Notes} />
+            <Route path='/create' component={Create} />
+          </Switch>
+        </Layout>
       </Router>
     </ThemeProvider>
   );
